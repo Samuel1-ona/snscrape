@@ -18,7 +18,7 @@ snscrape requires Python 3.8 or higher. The Python package dependencies are inst
 Note that one of the dependencies, lxml, also requires libxml2 and libxslt to be installed.
 
 ## Installation
-    pip3 install snscrape
+    !pip install snscrape
 
 If you want to use the development version:
 
@@ -69,4 +69,46 @@ This program is free software: you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
+
+
+
+
+
 You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+
+
+
+#STEPS TO SCRAPE DATA FROM TWITTER 
+
+
+
+INSTALLATION
+
+!pip install snscrape
+
+
+Install pandas and snscrape module
+
+import pandas as pd
+import snscrape.modules.twitter as sntwitter
+
+
+#SYNTAX TO FOLLOW 
+
+query = "(iphone15) until:2023-04-27 since:2023-04-17"
+tweets = []
+limit = 30000 ##You can change the number of rows
+
+for tweet in sntwitter.TwitterHashtagScraper(query).get_items():
+    if len(tweets) == limit:
+        break
+    else:
+        tweets.append([tweet.date, tweet.user.username, tweet.sourceLabel, tweet.user.location, tweet.likeCount, tweet.retweetCount]) ## you can add more columns
+            
+df = pd.DataFrame(tweets, columns=['Date', 'User', 'Source', 'Location', 'Like', 'Retweet'])
+df.to_csv('iphone15.csv', index=False)
+
+
+
