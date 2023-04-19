@@ -85,9 +85,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 
 INSTALLATION
-
+```
 !pip install snscrape
-
+```
 
 Install pandas and snscrape module
 
@@ -96,7 +96,7 @@ import snscrape.modules.twitter as sntwitter
 
 
 #SYNTAX TO FOLLOW 
-
+```
 query = "(iphone15) until:2023-04-27 since:2023-04-17"
 tweets = []
 limit = 30000 ##You can change the number of rows
@@ -109,6 +109,6 @@ for tweet in sntwitter.TwitterHashtagScraper(query).get_items():
             
 df = pd.DataFrame(tweets, columns=['Date', 'User', 'Source', 'Location', 'Like', 'Retweet'])
 df.to_csv('iphone15.csv', index=False)
-
+```
 
 
